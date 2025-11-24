@@ -11,7 +11,6 @@
 * **Unit Tests** – kleine Code-Komponenten
 * **Integration Tests** – Zusammenspiel von Modulen
 * **System Tests** – komplette Log-Pipelines in Elastic
-* **Regression Tests** – sicherstellen, dass bestehende Rules weiter funktionieren
 
 ### **Wann werden Tests ausgeführt?**
 
@@ -21,11 +20,7 @@
 
 ### **Haben wir dedizierte QA-Teams?**
 
-* Ja — ein **QA-Team**, das:
-
-  * Systemtests ausführt
-  * Detection Rules validiert
-  * Testdaten und Logs pflegt
+* Nein
 
 ### **Testing Life Cycle**
 
