@@ -1,16 +1,17 @@
 package ch.schule.bank.junit5;
 
-import ch.schule.Booking;
+import ch.schule.*;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BookingTests {
+class BookingTests {
 
     @Test
-    void testBookingFields() {
-        Booking b = new Booking(100, 5000);
+    void testBookingGetters() {
+        Booking b = new Booking(123, 9999);
 
-        assertEquals(100, b.getDate());
-        assertEquals(5000, b.getAmount());
+        assertEquals(123, b.getDate());
+        assertEquals(9999, b.getAmount());
     }
 }
