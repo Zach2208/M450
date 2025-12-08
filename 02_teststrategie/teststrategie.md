@@ -28,10 +28,43 @@
 
 ### Black-Box-Testfälle – Autovermietung
 
-| ID  | Beschreibung                                                                                           | Erwartetes Resultat                                                                                              | Effektives Resultat          | Status | Mögliche Ursache (bei Fehler)                          |
+| ID  | Beschreibung                                                                                           | Erwartetes Resultat                                                                                              |           | |                          |
 |-----|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------|--------|--------------------------------------------------------|
-| T1  | Suche nach Fahrzeugen mit gültigen Daten (Ort, Abholdatum < Rückgabedatum, Uhrzeiten sinnvoll)        | Trefferliste mit verfügbaren Fahrzeugen wird angezeigt, inkl. Preis und Fahrzeugdetails                         | Noch nicht getestet          | Offen  | –                                                      |
-| T2  | Suche mit ungültigem Zeitraum (Rückgabedatum vor Abholdatum)                                          | Deutliche Fehlermeldung, kein Suchresultat. Benutzer bleibt auf der Suchseite.                                  | Noch nicht getestet          | Offen  | Validierung der Datumsfelder fehlt/defekt              |
-| T3  | Vollständige Buchung mit bereits registriertem Benutzer (Login → Fahrzeug wählen → Daten bestätigen)   | Buchung wird bestätigt, Reservierungsnummer angezeigt, Bestätigungs-E-Mail wird an den Benutzer gesendet        | Noch nicht getestet          | Offen  | Fehler im Buchungs-Workflow oder E-Mail-Versand       |
-| T4  | Bezahlung mit gültiger Kreditkarte                                                                    | Zahlung wird akzeptiert, keine Fehlermeldung, Buchung wechselt in Status „bestätigt“                            | Noch nicht getestet          | Offen  | Schnittstelle zum Payment-Provider schlägt fehl        |
-| T5  | Preis-/Kostenanzeige: Gesamtkosten entsprechen Tagespreis × Anzahl Tage + Gebühren (z.B. Versicherung) | Anzeige der Gesamtkosten ist korrekt und stimmt mit den im Detail aufgeführten Einzelpreisen/Fee-Positionen überein | Noch nicht getestet          | Offen  | Falsche Berechnungslogik im Backend oder Rundungsfehler |
+| T1  | Suche nach Fahrzeugen mit gültigen Daten (Ort, Abholdatum < Rückgabedatum, Uhrzeiten sinnvoll)        | Trefferliste mit verfügbaren Fahrzeugen wird angezeigt, inkl. Preis und Fahrzeugdetails
+| T2  | Suche mit ungültigem Zeitraum (Rückgabedatum vor Abholdatum)                                          | Deutliche Fehlermeldung, kein Suchresultat. Benutzer bleibt auf der Suchseite. 
+| T3  | Vollständige Buchung mit bereits registriertem Benutzer (Login → Fahrzeug wählen → Daten bestätigen)   | Buchung wird bestätigt, Reservierungsnummer angezeigt, Bestätigungs-E-Mail wird an den Benutzer gesendet
+| T4  | Bezahlung mit gültiger Kreditkarte                                                                    | Zahlung wird akzeptiert, keine Fehlermeldung, Buchung wechselt in Status „bestätigt“ 
+| T5  | Preis-/Kostenanzeige: Gesamtkosten entsprechen Tagespreis × Anzahl Tage + Gebühren (z.B. Versicherung) | Anzeige der Gesamtkosten ist korrekt und stimmt mit den im Detail aufgeführten Einzelpreisen/Fee-Positionen überein
+
+## Übung 3
+
+### Black-Box Testfälle
+
+| ID | Komponente | Eingabe | Erwartetes Verhalten | Beschreibung |
+|----|------------|---------|----------------------|--------------|
+| BB1 | Account.deposit | +100 | Kontostand steigt um 100 | Normale Einzahlung |
+| BB2 | Account.deposit | -20 | Fehlermeldung / keine Änderung | Ungültige Einzahlung |
+| BB3 | Account.withdraw | 50 (Kontostand 100) | Kontostand = 50 | Normale Auszahlung |
+| BB4 | Account.withdraw | 200 (Kontostand 100) | Fehlermeldung / keine Änderung | Überziehung |
+| BB5 | Bank.createAccount | Name = "Alice" | Konto wird erstellt | Standardfall |
+| BB6 | Bank.createAccount | Name bereits vorhanden | doppelter Account verhindert | Duplicates überprüfen |
+| BB7 | Bank.getAccount | Name existiert | Konto wird geliefert | Reguläre Abfrage |
+| BB8 | Bank.getAccount | Name existiert nicht | null / Fehler | Fehlerfall |
+
+---
+
+### White-Box Testfälle (Methodenbezogen)
+
+| ID | Klasse | Methode | Ziel |
+|----|--------|----------|------|
+| WB1 | Account | deposit() | Grenzwerte testen (0, negativ, groß) |
+| WB2 | Account | withdraw() | Überziehung, negative Werte |
+| WB3 | Account | getBalance() | Konsistenz |
+| WB4 | Bank | createAccount() | Account existiert / existiert nicht |
+| WB5 | Bank | getAccount() | Pfad: gefunden / nicht gefunden |
+| WB6 | Bank | transfer() *(falls vorhanden)* | Internal consistency, atomicity |
+
+### Verbesserungen
+- Negative Beträge verhindern
+- Exceptions für invalide Eingaben anstatt null
+- Unit-Tests hinzufügen
