@@ -7,9 +7,13 @@ Es dient dazu, einzelne Softwarekomponenten automatisch zu testen und Softwarequ
 
 ## 1. Wichtige JUnit Features
 
-### ✔ @Test
+### @Test
 Markiert eine Methode als Testfall.
 
 ```java
 @Test
 void testAdd() { }
+```
+
+[JUnit User Guide](https://docs.junit.org/current/user-guide/)
+
