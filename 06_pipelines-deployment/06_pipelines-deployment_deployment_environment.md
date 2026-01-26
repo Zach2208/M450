@@ -10,7 +10,7 @@
 
 ## Aufgabe 2
 
--> siehe docker-compose.yml
+-> siehe docker-compose.yml & Dockerfiles
 
-Wir haben uns für ein Test-Environment mit Docker Compose entschieden. Dafür haben wir eine kleines OpenJDK Image verwendet, was als Beispiel eine Webapplikation sein könnte, zusammen mit einer PostgreSQL Datenbank, welche alle Benutzerdaten repräsentiert. Die Arbeit mit Docker Compose hat uns gezeigt, wie schnell und einfach es ist, Testumgebungen automatisiert aufzusetzen,  was manuell fast unmöglich wäre. Docker Compose eignet sich definitiv für kleine bis mittelgrosse Projekte, die auf schnelle Aufsetzungen Wert legen.
+Wir haben uns für ein Test-Environment mit Docker Compose entschieden, da es für diesen Use-Case als effizienteste Variante bewiesen. Zudem kennen wir uns bereits mit Docker, bzw. Dockerfiles und docker-compose.yml-Files aus durch frühere Projekte im Betrieb.
 

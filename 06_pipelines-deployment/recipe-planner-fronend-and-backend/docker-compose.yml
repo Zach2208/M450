@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./recipe-planner-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - recipe-network
+ 
+  frontend:
+    build:
+      context: ./recipe-planner-fronend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - recipe-network
+ 
+networks:
+  recipe-network:
+    driver: bridge
+ 
